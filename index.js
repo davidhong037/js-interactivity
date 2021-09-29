@@ -1,5 +1,5 @@
 // console.log ('hello world')
-const message = document.querySelector('#mesasge')
+const message = document.querySelector('#message')
 
 function addMovie(event){
     event.preventDefault()
@@ -27,16 +27,35 @@ function addMovie(event){
 
 function deleteMovie(event){
     event.target.parentNode.remove()
-    message.textContent = alert('Movie Deleted!')
+    // message.textContent = 'Movie Deleted!'
+    message.textContent = `${event.target.parentNode.childNodes[0].textContent} deleted!`
+    //parentNode = li (movie)
+    //movieTitle and deleteBtn are children of li (movie)
+    //childNodes[] -> checks for index
+
+    revealMessage()
 }
 
 function crossOffMovie(event){    
     event.target.classList.toggle('checked')
-    if (event.target.classList.contains('checked')){
-        message.textContent = alert('Movie Watched!')
+    console.log(event.target.classList.contains('checked'))
+    if (event.target.classList.contains('checked') === true){
+        // message.textContent = 'Movie Watched!'
+        message.textContent = `${event.target.textContent} watched!`
     } else {
-        message.textContent = alert('Movie added back!')
+        // message.textContent = 'Movie added back!'
+        message.textContent = `${event.target.textContent} added back!`
     }
+
+    revealMessage()
+}
+
+function revealMessage(){
+    message.classList.remove('hide')
+
+    setTimeout(() => {
+        message.className = "hide"
+    }, 1000);
 }
 
 const formList = document.querySelector('form')
